@@ -1,34 +1,42 @@
 <?php
 
 class Conexion {
+    
+    private $host;
+    private $db_name;
+    private $username;
+    private $password;
     private $conn;
 
-    public function conectar() {
-        $this->conn = null;
-
+    public function __construct() {
         $envPath = __DIR__ . '/../.env';
         
         
-        $host = 'localhost';
-        $db_name = 'persona';
-        $username = 'root';
-        $password = '';
+        $this->host = 'localhost';
+        $this->db_name = 'persona';
+        $this->username = 'root';
+        $this->password = '';
 
         if (file_exists($envPath)) {
             $env = parse_ini_file($envPath);
             if ($env !== false) {
-                $host = $env['DB_HOST'] ?? $host;
-                $db_name = $env['DB_NAME'] ?? $db_name;
-                $username = $env['DB_USER'] ?? $username;
-                $password = $env['DB_PASS'] ?? $password;
+                $this->host = $env['DB_HOST'] ?? $this->host;
+                $this->db_name = $env['DB_NAME'] ?? $this->db_name;
+                $this->username = $env['DB_USER'] ?? $this->username;
+                $this->password = $env['DB_PASS'] ?? $this->password;
             }
         }
+    }
+
+    
+    public function conectar() {
+        $this->conn = null;
 
         try {
             $this->conn = new PDO(
-                "mysql:host=" . $host . ";dbname=" . $db_name,
-                $username,
-                $password
+                "mysql:host=" . $this->host . ";dbname=" . $this->db_name,
+                $this->username,
+                $this->password
             );
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->conn->exec("set names utf8");

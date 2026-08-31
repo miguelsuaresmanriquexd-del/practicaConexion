@@ -6,7 +6,7 @@ class Persona {
     private $conexion;
     private $tabla = "persona";
 
-    // Atributos de la entidad
+    
     private $id;
     private $nombre;
     private $edad;
@@ -23,7 +23,7 @@ class Persona {
         $this->correo = $correo;
     }
 
-    // Getters y Setters
+    
     public function getId() { return $this->id; }
     public function setId($id) { $this->id = $id; }
 
@@ -36,7 +36,7 @@ class Persona {
     public function getCorreo() { return $this->correo; }
     public function setCorreo($correo) { $this->correo = $correo; }
 
-    // Método para listar las personas de la BD ($sql = "SELECT * FROM persona")
+    
     public function listaPersonas() {
         $sql = "SELECT * FROM " . $this->tabla;
         $stmt = $this->conexion->prepare($sql);
