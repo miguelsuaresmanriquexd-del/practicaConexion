@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . '/../app/controllers/PersonaController.php';
+require_once __DIR__ . '/../config/Conexion.php';
 
-// Instanciar controlador y ejecutar la acción
-$controller = new PersonaController();
-$controller->index();
+// Instanciar y probar la conexión directamente
+$conexion = new Conexion();
+$conexion->conectar();

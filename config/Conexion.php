@@ -3,8 +3,8 @@
 class Conexion {
     private $host = "localhost";
     private $db_name = "persona";
-    private $username = "root"; // Ajusta según tu servidor (ej. root)
-    private $password = "";     // Ajusta según tu servidor
+    private $username = "root";
+    private $password = "";
     private $conn;
 
     public function conectar() {
@@ -18,6 +18,10 @@ class Conexion {
             );
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->conn->exec("set names utf8");
+            
+            // Imprime el mensaje si la conexión es correcta
+            echo "Conexión exitosa";
+
         } catch(PDOException $e) {
             echo "Error de conexión: " . $e->getMessage();
         }
